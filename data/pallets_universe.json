@@ -1,0 +1,970 @@
+{
+  "org_id": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+  "org_name": "pallets",
+  "level": 0,
+  "nodes": [
+    {
+      "id": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "name": "pallets",
+      "kind": "Organization",
+      "cluster_group": "core-org",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "radius": 8.0,
+      "color_hint": "#f59e0b",
+      "claim_state": "observed",
+      "risk_level": "low",
+      "metrics": {
+        "public_repos": 10,
+        "description": "OSAKG ingested knowledge graph for pallets",
+        "url": "https://github.com/pallets",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "f908a570312dd2a0403a936abea427ef1ff6a462a10f65a116af7e30250879b7",
+      "name": "TrustBoundary: Public Internet Edge",
+      "kind": "TrustBoundary",
+      "cluster_group": "security-perimeter",
+      "x": 0.0,
+      "y": 85.0,
+      "z": 0.0,
+      "radius": 5.0,
+      "color_hint": "#f43f5e",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "security_zone": "Untrusted Public Ingress",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "name": "TrustBoundary: pallets Internal Mesh",
+      "kind": "TrustBoundary",
+      "cluster_group": "security-perimeter",
+      "x": 0.0,
+      "y": -85.0,
+      "z": 0.0,
+      "radius": 5.0,
+      "color_hint": "#ef4444",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "security_zone": "Authenticated Core Services",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "24dcf1a07109088ece1ee4cfb8625744b9b4f2aa70d50a23abb291c4b90a9bf7",
+      "name": "TrustBoundary: Secure Data & Secrets Tier",
+      "kind": "TrustBoundary",
+      "cluster_group": "security-perimeter",
+      "x": 90.0,
+      "y": 0.0,
+      "z": 0.0,
+      "radius": 5.0,
+      "color_hint": "#f59e0b",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "security_zone": "Isolated Storage & Key Vault",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "461e56beaa8029345590103ee69585402f3f5c0a06775830195d4eb48ffc6760",
+      "name": "Control: Identity & Access Gate",
+      "kind": "Control",
+      "cluster_group": "security-perimeter",
+      "x": 30.0,
+      "y": 65.0,
+      "z": 20.0,
+      "radius": 3.5,
+      "color_hint": "#22c55e",
+      "claim_state": "observed",
+      "risk_level": "low",
+      "metrics": {
+        "control_type": "Authentication",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "9141f66d5ead09c81975f2a885f7f8b4c0cfdf9cffe8e9425b6f0f7743d58f79",
+      "name": "Control: Provenance Audit Ledger",
+      "kind": "Control",
+      "cluster_group": "security-perimeter",
+      "x": -30.0,
+      "y": 65.0,
+      "z": 20.0,
+      "radius": 3.5,
+      "color_hint": "#22c55e",
+      "claim_state": "observed",
+      "risk_level": "low",
+      "metrics": {
+        "control_type": "IntegrityAudit",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "fc2d4361a1e34e3bd4333e3afd1f5e43861422cbbc06fbe1a2cab795685aa323",
+      "name": "flask",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": 0.0,
+      "y": 70.0,
+      "z": 0.0,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "stars": 75020,
+        "forks": 17112,
+        "open_issues": 4,
+        "language": "Python",
+        "archived": false,
+        "default_branch": "main",
+        "html_url": "https://github.com/pallets/flask",
+        "description": "The Python micro framework for building web applications.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "5c9c247c27341ce0b5d76fd28bf41731be5d69eb64a79573406deb841bcd6ca9",
+      "name": "pkg:flask",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": 0.0,
+      "y": 66.4,
+      "z": 0.0,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "flask",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "name": "flask-sphinx-themes",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": -32.44,
+      "y": 54.44,
+      "z": 29.72,
+      "radius": 3.2,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "high",
+      "metrics": {
+        "stars": 167,
+        "forks": 57,
+        "open_issues": 0,
+        "language": "Python",
+        "archived": true,
+        "default_branch": "master",
+        "html_url": "https://github.com/pallets/flask-sphinx-themes",
+        "description": "Sphinx themes for Pallets projects",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "141abebedd8f7fdaf43ff607b1da0750975aa444c48b2519e77a6b209d7cc83d",
+      "name": "pkg:flask-sphinx-themes",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": -29.84,
+      "y": 52.08,
+      "z": 27.34,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "flask-sphinx-themes",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "15d1042421cb2389070334afed1b1e0b0b129371be205dd62e5d307860fa3aea",
+      "name": "Archived Unmaintained: flask-sphinx-themes",
+      "kind": "Finding",
+      "cluster_group": "vulnerabilities",
+      "x": -35.04,
+      "y": 61.8,
+      "z": 32.1,
+      "radius": 3.0,
+      "color_hint": "#ef4444",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "cvss": 5.3,
+        "cwe": "CWE-1104",
+        "description": "Repository is archived on GitHub; security vulnerabilities will not receive patches.",
+        "min_level": 2
+      }
+    },
+    {
+      "id": "c37c5bedc0c1945e1d60ca15a9b5f4546038c2c6e8424be38bd63c9a6ca35534",
+      "name": "markupsafe",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": 5.09,
+      "y": 38.89,
+      "z": -57.98,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "low",
+      "metrics": {
+        "stars": 699,
+        "forks": 194,
+        "open_issues": 6,
+        "language": "Python",
+        "archived": false,
+        "default_branch": "main",
+        "html_url": "https://github.com/pallets/markupsafe",
+        "description": "Safely add untrusted strings to HTML/XML markup.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "1308f464701082213f72ee69439fbcd7b014f7ee8d39c2669165cc39f5921d6e",
+      "name": "pkg:markupsafe",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": 4.68,
+      "y": 37.78,
+      "z": -53.34,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "markupsafe",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "81dc0fd83a16b59d9b3db50aedf312bde9ea505922808ded52307645b4761ee4",
+      "name": "jinja",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": 40.15,
+      "y": 23.33,
+      "z": 52.37,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "high",
+      "metrics": {
+        "stars": 11804,
+        "forks": 1869,
+        "open_issues": 105,
+        "language": "Python",
+        "archived": false,
+        "default_branch": "main",
+        "html_url": "https://github.com/pallets/jinja",
+        "description": "A very fast and expressive template engine.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "0f18b87737de20664922b77e47b5bbb45b7844524415df25c1387753516eb404",
+      "name": "pkg:jinja",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": 36.94,
+      "y": 23.46,
+      "z": 48.18,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "jinja",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "02e5fecd15f12644de42150b8baccf5cbf5b7ba834445a2d1ec74bb22102833b",
+      "name": "werkzeug",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": -68.5,
+      "y": 7.78,
+      "z": -12.12,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "stars": 6882,
+        "forks": 1858,
+        "open_issues": 6,
+        "language": "Python",
+        "archived": false,
+        "default_branch": "main",
+        "html_url": "https://github.com/pallets/werkzeug",
+        "description": "The comprehensive WSGI web application library.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "95ff609ab3efd68b7b175f67b8dbd02d231ae072407b2e44cdd1a8b65f6ad89a",
+      "name": "pkg:werkzeug",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": -63.02,
+      "y": 9.16,
+      "z": -11.15,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "werkzeug",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "ac8bf03a7a602dfae6aebb35c2bf21afb99ba21a0628c01d55842387032a8afa",
+      "name": "itsdangerous",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": 58.7,
+      "y": -7.78,
+      "z": -37.34,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "stars": 3141,
+        "forks": 299,
+        "open_issues": 4,
+        "language": "Python",
+        "archived": false,
+        "default_branch": "main",
+        "html_url": "https://github.com/pallets/itsdangerous",
+        "description": "Safely pass trusted data to untrusted environments and back.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "ffd82a204c0a5eac419b2a2bb5811c399b5da8fd0d22ea44ef754197f3920d70",
+      "name": "pkg:itsdangerous",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": 54.0,
+      "y": -5.16,
+      "z": -34.35,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "itsdangerous",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "name": "flask-website",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": -17.13,
+      "y": -23.33,
+      "z": 63.73,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "high",
+      "metrics": {
+        "stars": 1338,
+        "forks": 574,
+        "open_issues": 0,
+        "language": "Python",
+        "archived": true,
+        "default_branch": "master",
+        "html_url": "https://github.com/pallets/flask-website",
+        "description": "The Flask website, built with Flask!",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "a47c1e96aad42f4ddbd039738c4b69dd1c8c66a7fc0318b2ababbba99faffee8",
+      "name": "pkg:flask-website",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": -15.76,
+      "y": -19.46,
+      "z": 58.63,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "flask-website",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "1a1937b71434540e60bd93e1c795fbfebb60628ce7f3da11c2f0a0764c323526",
+      "name": "Archived Unmaintained: flask-website",
+      "kind": "Finding",
+      "cluster_group": "vulnerabilities",
+      "x": -18.5,
+      "y": -22.2,
+      "z": 68.83,
+      "radius": 3.0,
+      "color_hint": "#ef4444",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "cvss": 5.3,
+        "cwe": "CWE-1104",
+        "description": "Repository is archived on GitHub; security vulnerabilities will not receive patches.",
+        "min_level": 2
+      }
+    },
+    {
+      "id": "ae4baede1049d753cdb1c1216852523d6822ec16c0d90c3db860d441557f73f1",
+      "name": "click",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": -26.83,
+      "y": -38.89,
+      "z": -51.65,
+      "radius": 4.5,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "high",
+      "metrics": {
+        "stars": 17800,
+        "forks": 4683,
+        "open_issues": 86,
+        "language": "Python",
+        "archived": false,
+        "default_branch": "main",
+        "html_url": "https://github.com/pallets/click",
+        "description": "Python composable command line interface toolkit",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "76043dcc62bf45dfbed1c154cbfbef1dd1227c8012415868d318c6450f26052e",
+      "name": "pkg:click",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": -24.68,
+      "y": -33.78,
+      "z": -47.52,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "click",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "name": "flask-docs",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": 41.33,
+      "y": -54.44,
+      "z": 15.09,
+      "radius": 3.2,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "high",
+      "metrics": {
+        "stars": 35,
+        "forks": 10,
+        "open_issues": 0,
+        "language": "Python",
+        "archived": true,
+        "default_branch": "master",
+        "html_url": "https://github.com/pallets/flask-docs",
+        "description": "A tool to build the Flask documentation in different versions.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "ceb68ab55ed362e0ac378923cf745ec1b15f034b65053ba892c65f132c45d96c",
+      "name": "pkg:flask-docs",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": 38.02,
+      "y": -48.08,
+      "z": 13.88,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "flask-docs",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "8a5b3f7ddb86338f28f210e00186713525aed8edeea8785a3e506d1962991802",
+      "name": "Archived Unmaintained: flask-docs",
+      "kind": "Finding",
+      "cluster_group": "vulnerabilities",
+      "x": 44.64,
+      "y": -55.8,
+      "z": 16.3,
+      "radius": 3.0,
+      "color_hint": "#ef4444",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "cvss": 5.3,
+        "cwe": "CWE-1104",
+        "description": "Repository is archived on GitHub; security vulnerabilities will not receive patches.",
+        "min_level": 2
+      }
+    },
+    {
+      "id": "c498d080eb6c381cbd3a6a6b63670e54ecfc603c8e61e2b81a744c5383fbe81a",
+      "name": "flask-ext-migrate",
+      "kind": "Repository",
+      "cluster_group": "lang-python",
+      "x": -0.0,
+      "y": -70.0,
+      "z": 0.0,
+      "radius": 3.2,
+      "color_hint": "#3b82f6",
+      "claim_state": "observed",
+      "risk_level": "high",
+      "metrics": {
+        "stars": 20,
+        "forks": 7,
+        "open_issues": 0,
+        "language": "Python",
+        "archived": true,
+        "default_branch": "master",
+        "html_url": "https://github.com/pallets/flask-ext-migrate",
+        "description": "A script for migrating extension import syntax.",
+        "min_level": 0
+      }
+    },
+    {
+      "id": "ee2fcccbd5be6ae84b6e7bf6c30fd7e854c173b82e64a6cec3045b3f5f1bde17",
+      "name": "pkg:flask-ext-migrate",
+      "kind": "Package",
+      "cluster_group": "lang-python",
+      "x": -0.0,
+      "y": -62.4,
+      "z": 0.0,
+      "radius": 2.6,
+      "color_hint": "#059669",
+      "claim_state": "inferred",
+      "risk_level": "low",
+      "metrics": {
+        "package_manager": "pypi",
+        "language": "Python",
+        "repo": "flask-ext-migrate",
+        "min_level": 1
+      }
+    },
+    {
+      "id": "f67769d6e5122ed35244c2fc2ae22fd56af34d02b54107705ac837d844c081cc",
+      "name": "Archived Unmaintained: flask-ext-migrate",
+      "kind": "Finding",
+      "cluster_group": "vulnerabilities",
+      "x": -0.0,
+      "y": -72.6,
+      "z": 0.0,
+      "radius": 3.0,
+      "color_hint": "#ef4444",
+      "claim_state": "observed",
+      "risk_level": "medium",
+      "metrics": {
+        "cvss": 5.3,
+        "cwe": "CWE-1104",
+        "description": "Repository is archived on GitHub; security vulnerabilities will not receive patches.",
+        "min_level": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-org-flask",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "fc2d4361a1e34e3bd4333e3afd1f5e43861422cbbc06fbe1a2cab795685aa323",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-flask",
+      "source": "fc2d4361a1e34e3bd4333e3afd1f5e43861422cbbc06fbe1a2cab795685aa323",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-flask",
+      "source": "fc2d4361a1e34e3bd4333e3afd1f5e43861422cbbc06fbe1a2cab795685aa323",
+      "target": "5c9c247c27341ce0b5d76fd28bf41731be5d69eb64a79573406deb841bcd6ca9",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-org-flask-sphinx-themes",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-flask-sphinx-themes",
+      "source": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-flask-sphinx-themes",
+      "source": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "target": "141abebedd8f7fdaf43ff607b1da0750975aa444c48b2519e77a6b209d7cc83d",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-finding-flask-sphinx-themes",
+      "source": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "target": "15d1042421cb2389070334afed1b1e0b0b129371be205dd62e5d307860fa3aea",
+      "kind": "EXPOSES",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-org-markupsafe",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "c37c5bedc0c1945e1d60ca15a9b5f4546038c2c6e8424be38bd63c9a6ca35534",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-markupsafe",
+      "source": "c37c5bedc0c1945e1d60ca15a9b5f4546038c2c6e8424be38bd63c9a6ca35534",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-markupsafe",
+      "source": "c37c5bedc0c1945e1d60ca15a9b5f4546038c2c6e8424be38bd63c9a6ca35534",
+      "target": "1308f464701082213f72ee69439fbcd7b014f7ee8d39c2669165cc39f5921d6e",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-org-jinja",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "81dc0fd83a16b59d9b3db50aedf312bde9ea505922808ded52307645b4761ee4",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-jinja",
+      "source": "81dc0fd83a16b59d9b3db50aedf312bde9ea505922808ded52307645b4761ee4",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-jinja",
+      "source": "81dc0fd83a16b59d9b3db50aedf312bde9ea505922808ded52307645b4761ee4",
+      "target": "0f18b87737de20664922b77e47b5bbb45b7844524415df25c1387753516eb404",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-org-werkzeug",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "02e5fecd15f12644de42150b8baccf5cbf5b7ba834445a2d1ec74bb22102833b",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-werkzeug",
+      "source": "02e5fecd15f12644de42150b8baccf5cbf5b7ba834445a2d1ec74bb22102833b",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-werkzeug",
+      "source": "02e5fecd15f12644de42150b8baccf5cbf5b7ba834445a2d1ec74bb22102833b",
+      "target": "95ff609ab3efd68b7b175f67b8dbd02d231ae072407b2e44cdd1a8b65f6ad89a",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-org-itsdangerous",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "ac8bf03a7a602dfae6aebb35c2bf21afb99ba21a0628c01d55842387032a8afa",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-itsdangerous",
+      "source": "ac8bf03a7a602dfae6aebb35c2bf21afb99ba21a0628c01d55842387032a8afa",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-itsdangerous",
+      "source": "ac8bf03a7a602dfae6aebb35c2bf21afb99ba21a0628c01d55842387032a8afa",
+      "target": "ffd82a204c0a5eac419b2a2bb5811c399b5da8fd0d22ea44ef754197f3920d70",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-org-flask-website",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-flask-website",
+      "source": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-flask-website",
+      "source": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "target": "a47c1e96aad42f4ddbd039738c4b69dd1c8c66a7fc0318b2ababbba99faffee8",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-finding-flask-website",
+      "source": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "target": "1a1937b71434540e60bd93e1c795fbfebb60628ce7f3da11c2f0a0764c323526",
+      "kind": "EXPOSES",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-org-click",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "ae4baede1049d753cdb1c1216852523d6822ec16c0d90c3db860d441557f73f1",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-click",
+      "source": "ae4baede1049d753cdb1c1216852523d6822ec16c0d90c3db860d441557f73f1",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-click",
+      "source": "ae4baede1049d753cdb1c1216852523d6822ec16c0d90c3db860d441557f73f1",
+      "target": "76043dcc62bf45dfbed1c154cbfbef1dd1227c8012415868d318c6450f26052e",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-org-flask-docs",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-flask-docs",
+      "source": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-flask-docs",
+      "source": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "target": "ceb68ab55ed362e0ac378923cf745ec1b15f034b65053ba892c65f132c45d96c",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-finding-flask-docs",
+      "source": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "target": "8a5b3f7ddb86338f28f210e00186713525aed8edeea8785a3e506d1962991802",
+      "kind": "EXPOSES",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-org-flask-ext-migrate",
+      "source": "73fcb1a8b59ec3f93e183c5bbd1013307e4cee53c7fb20b2e7fdfc0d8e72356f",
+      "target": "c498d080eb6c381cbd3a6a6b63670e54ecfc603c8e61e2b81a744c5383fbe81a",
+      "kind": "CONTAINS",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-boundary-flask-ext-migrate",
+      "source": "c498d080eb6c381cbd3a6a6b63670e54ecfc603c8e61e2b81a744c5383fbe81a",
+      "target": "aa58e69a5ce98f1a14c79396ecbfece41dbee9f9496330312279ffd43c07f352",
+      "kind": "CROSSES_BOUNDARY",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-repo-pkg-flask-ext-migrate",
+      "source": "c498d080eb6c381cbd3a6a6b63670e54ecfc603c8e61e2b81a744c5383fbe81a",
+      "target": "ee2fcccbd5be6ae84b6e7bf6c30fd7e854c173b82e64a6cec3045b3f5f1bde17",
+      "kind": "CONTAINS",
+      "claim_state": "inferred",
+      "confidence": 0.95
+    },
+    {
+      "id": "edge-finding-flask-ext-migrate",
+      "source": "c498d080eb6c381cbd3a6a6b63670e54ecfc603c8e61e2b81a744c5383fbe81a",
+      "target": "f67769d6e5122ed35244c2fc2ae22fd56af34d02b54107705ac837d844c081cc",
+      "kind": "EXPOSES",
+      "claim_state": "observed",
+      "confidence": 1.0
+    },
+    {
+      "id": "edge-dep-flask-flask-sphinx-themes",
+      "source": "fc2d4361a1e34e3bd4333e3afd1f5e43861422cbbc06fbe1a2cab795685aa323",
+      "target": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-flask-sphinx-themes-markupsafe",
+      "source": "1947085675db3326690e1c6f17b4dc65b6150da485b8e0e5d2d084ff307914ef",
+      "target": "c37c5bedc0c1945e1d60ca15a9b5f4546038c2c6e8424be38bd63c9a6ca35534",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-markupsafe-jinja",
+      "source": "c37c5bedc0c1945e1d60ca15a9b5f4546038c2c6e8424be38bd63c9a6ca35534",
+      "target": "81dc0fd83a16b59d9b3db50aedf312bde9ea505922808ded52307645b4761ee4",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-jinja-werkzeug",
+      "source": "81dc0fd83a16b59d9b3db50aedf312bde9ea505922808ded52307645b4761ee4",
+      "target": "02e5fecd15f12644de42150b8baccf5cbf5b7ba834445a2d1ec74bb22102833b",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-werkzeug-itsdangerous",
+      "source": "02e5fecd15f12644de42150b8baccf5cbf5b7ba834445a2d1ec74bb22102833b",
+      "target": "ac8bf03a7a602dfae6aebb35c2bf21afb99ba21a0628c01d55842387032a8afa",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-itsdangerous-flask-website",
+      "source": "ac8bf03a7a602dfae6aebb35c2bf21afb99ba21a0628c01d55842387032a8afa",
+      "target": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-flask-website-click",
+      "source": "db034ff10d54f14abb89e521ba9a6753565b07c564ffc6caf358ff7a0eabbf46",
+      "target": "ae4baede1049d753cdb1c1216852523d6822ec16c0d90c3db860d441557f73f1",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-click-flask-docs",
+      "source": "ae4baede1049d753cdb1c1216852523d6822ec16c0d90c3db860d441557f73f1",
+      "target": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge-dep-flask-docs-flask-ext-migrate",
+      "source": "c7f5a5defbdc62bbefcb2b6185a0d6b5e1cfd80442c74284140bca383c00850a",
+      "target": "c498d080eb6c381cbd3a6a6b63670e54ecfc603c8e61e2b81a744c5383fbe81a",
+      "kind": "DEPENDS_ON",
+      "claim_state": "inferred",
+      "confidence": 0.7
+    }
+  ],
+  "metadata": {
+    "total_nodes": 30,
+    "total_edges": 43,
+    "repositories_indexed": 10,
+    "generator": "osakg-universal-ingest",
+    "version": "0.3.0"
+  }
+}

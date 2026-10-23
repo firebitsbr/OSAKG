@@ -7,7 +7,7 @@
 // =====================================================================
 
 import React from 'react';
-import { Shield, Search, Layers, RefreshCw, Sun, Moon, Palette, ShieldAlert, Filter, Activity } from 'lucide-react';
+import { Shield, Search, Layers, RefreshCw, Sun, Moon, Palette, ShieldAlert, Filter, Activity, Globe } from 'lucide-react';
 import { ClaimState } from '../types';
 import { ThemeMode, UITheme } from '../theme';
 
@@ -35,6 +35,8 @@ interface EnterpriseHeaderProps {
   themeMode: ThemeMode;
   onToggleThemeMode: () => void;
   onOpenColorModal: () => void;
+  onOpenIngestModal?: () => void;
+  tenantName?: string;
 }
 
 export const EnterpriseHeader: React.FC<EnterpriseHeaderProps> = ({
@@ -59,6 +61,8 @@ export const EnterpriseHeader: React.FC<EnterpriseHeaderProps> = ({
   themeMode,
   onToggleThemeMode,
   onOpenColorModal,
+  onOpenIngestModal,
+  tenantName,
 }) => {
   return (
     <>
@@ -133,8 +137,41 @@ export const EnterpriseHeader: React.FC<EnterpriseHeaderProps> = ({
                 boxShadow: '0 0 8px #10b981',
               }}
             />
-            <span>TENANT: anthropics-public</span>
+            <span>TENANT: {tenantName || 'anthropics-public'}</span>
           </div>
+
+          {/* Ingest Organization Button */}
+          {onOpenIngestModal && (
+            <button
+              onClick={onOpenIngestModal}
+              title="Ingerir Repositórios de uma Organização GitHub"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                border: '1px solid rgba(56, 189, 248, 0.35)',
+                color: '#38bdf8',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+                transition: 'all 0.15s ease',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(56, 189, 248, 0.22)';
+                (e.currentTarget as HTMLElement).style.borderColor = '#38bdf8';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(56, 189, 248, 0.12)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(56, 189, 248, 0.35)';
+              }}
+            >
+              <Globe size={13} />
+              <span>+ Ingerir Org</span>
+            </button>
+          )}
         </div>
 
         {/* Center: Command Palette Trigger Input */}

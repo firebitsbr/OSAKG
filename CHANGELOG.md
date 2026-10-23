@@ -11,6 +11,7 @@ License: MIT
 # Changelog
 
 ## 0.3.0 — Enterprise UI, Continuous Google-Earth Zoom & Massive Deep AST
+- **Universal Organization Ingestion Pipeline**: Added capability to ingest all public repositories of any GitHub organization or user account on-the-fly (`scripts/ingest_org.py`, `crates/osakg-ingest`, `crates/osakg-api`, and UI `IngestOrgModal`). Synthesizes deterministic SHA-256 IDs, Fibonacci celestial coordinates, packages, trust boundaries, security findings, and heuristic cross-repo dependencies.
 - **Project Identity**: Replaced all remaining legacy references to "Grafos" with "OSAKG" in repository documentation, links, git origin remote, and UI telemetry.
 - **Massive Graph Scale**: Expanded universe to 1,603 nodes and 1,700 edges across 100 Anthropic public repositories, with 1,471 deep AST entities (Directories, Files, Classes, Functions with signatures, Packages/Dependencies, Endpoints, DataStores, TrustBoundaries).
 - **Continuous Google-Earth 3D Zoom**: Implemented mouse wheel continuous LOD transitions (L0 Orbit -> L1 Continents -> L2 Cities -> L3 AST Street level) with real-time altitude telemetry HUD (`ALTITUDE: XX km`, `LOD`, `NODES IN VIEW`).

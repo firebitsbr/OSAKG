@@ -6,7 +6,7 @@
 // License: MIT
 // =====================================================================
 
-import { UniverseTileResponse, NeighborhoodResponse, EvidenceRecord } from './types';
+import { UniverseTileResponse, UniverseNodeSpatial, NeighborhoodResponse, EvidenceRecord } from './types';
 
 // Synthetic ground truth fallback dataset (20+ nodes representing org sphere)
 export const SYNTHETIC_FALLBACK_UNIVERSE: UniverseTileResponse = {
@@ -572,6 +572,329 @@ export const SYNTHETIC_FALLBACK_UNIVERSE: UniverseTileResponse = {
 const API_BASE = 'http://localhost:3030/api/v1';
 
 let cachedUniverse: UniverseTileResponse | null = null;
+
+export async function computeDeterministicId(...parts: (string | number)[]): Promise<string> {
+  const str = parts.join('|');
+  const buffer = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buffer);
+  return Array.from(new Uint8Array(hash))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+export async function ingestGitHubOrg(
+  orgName: string,
+  token?: string,
+  maxRepos = 50,
+  onProgress?: (msg: string) => void
+): Promise<UniverseTileResponse> {
+  const cleanOrg = orgName.trim();
+  onProgress?.(`Consultando API do GitHub para '${cleanOrg}'...`);
+
+  // Try static pre-generated file first if exists
+  try {
+    const staticRes = await fetch(`/${cleanOrg.toLowerCase()}_universe.json`);
+    if (staticRes.ok) {
+      const data = await staticRes.json();
+      if (data.nodes && data.nodes.length > 0) {
+        cachedUniverse = data;
+        onProgress?.(`Dataset local de '${cleanOrg}' carregado com sucesso.`);
+        return data;
+      }
+    }
+  } catch (_e) {
+    // continue
+  }
+
+  // Fetch repositories from GitHub
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github.v3+json',
+  };
+  if (token && token.trim()) {
+    headers['Authorization'] = `Bearer ${token.trim()}`;
+  }
+
+  const repos: any[] = [];
+  let page = 1;
+  let isUser = false;
+
+  while (repos.length < maxRepos) {
+    const perPage = Math.min(100, maxRepos - repos.length);
+    const url = isUser
+      ? `https://api.github.com/users/${encodeURIComponent(cleanOrg)}/repos?per_page=${perPage}&page=${page}`
+      : `https://api.github.com/orgs/${encodeURIComponent(cleanOrg)}/repos?per_page=${perPage}&page=${page}`;
+
+    onProgress?.(`Buscando repositórios (página ${page})...`);
+    let res = await fetch(url, { headers });
+
+    if (res.status === 404 && !isUser) {
+      isUser = true;
+      page = 1;
+      continue;
+    }
+
+    if (!res.ok) {
+      const errJson = await res.json().catch(() => ({}));
+      throw new Error(errJson.message || `Erro GitHub API HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) break;
+    repos.push(...data);
+    onProgress?.(`Coletados ${repos.length} repositórios...`);
+    if (data.length < perPage) break;
+    page++;
+  }
+
+  if (repos.length === 0) {
+    throw new Error(`Nenhum repositório público encontrado para '${cleanOrg}'.`);
+  }
+
+  onProgress?.(`Sintetizando topologia celestial e nós OSAKG para ${repos.length} repositórios...`);
+
+  // If backend is active, try to sync with backend
+  try {
+    const isTauri = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
+    if (isTauri) {
+      const { invoke } = await import('@tauri-apps/api/core');
+      await invoke('ingest_github_org', { orgName: cleanOrg, reposJson: repos });
+    } else {
+      await fetch(`${API_BASE}/ingestions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ org_name: cleanOrg, github_repos: repos }),
+      });
+    }
+  } catch (_e) {
+    // Non-blocking sync failure
+  }
+
+  // Synthesize client-side Universe
+  const tenantId = `tenant-${cleanOrg.toLowerCase()}-public`;
+  const sphereRadius = 70.0;
+  const phiGolden = Math.PI * (3.0 - Math.sqrt(5.0));
+
+  const nodes: UniverseNodeSpatial[] = [];
+  const edges: UniverseTileResponse['edges'] = [];
+
+  // Central Org Node
+  const orgId = await computeDeterministicId(tenantId, 'Organization', 'github', cleanOrg, 'v1');
+  nodes.push({
+    id: orgId,
+    name: cleanOrg,
+    kind: 'Organization',
+    cluster_group: 'core-org',
+    x: 0,
+    y: 0,
+    z: 0,
+    radius: 8.0,
+    color_hint: '#f59e0b',
+    claim_state: 'observed',
+    risk_level: 'low',
+    metrics: {
+      public_repos: repos.length,
+      description: `OSAKG live ingested universe for ${cleanOrg}`,
+      url: `https://github.com/${cleanOrg}`,
+      min_level: 0,
+    },
+  });
+
+  // Trust Boundaries
+  const tbInternalId = await computeDeterministicId(tenantId, 'TrustBoundary', 'perimeter', 'tb-internal-mesh', 'v1');
+  nodes.push({
+    id: tbInternalId,
+    name: `TrustBoundary: ${cleanOrg} Internal Mesh`,
+    kind: 'TrustBoundary',
+    cluster_group: 'security-perimeter',
+    x: 0,
+    y: -85,
+    z: 0,
+    radius: 5.0,
+    color_hint: '#ef4444',
+    claim_state: 'observed',
+    risk_level: 'medium',
+    metrics: { zone: 'internal_mesh', min_level: 0 },
+  });
+
+  const reposByLang: Record<string, { name: string; id: string }[]> = {};
+
+  for (let idx = 0; idx < repos.length; idx++) {
+    const r = repos[idx];
+    const name = r.name || `repo-${idx}`;
+    const lang = r.language || 'Config';
+    const stars = r.stargazers_count || 0;
+    const forks = r.forks_count || 0;
+    const issues = r.open_issues_count || 0;
+    const archived = Boolean(r.archived);
+    const defaultBranch = r.default_branch || 'main';
+
+    const y = 1.0 - (idx / Math.max(1, repos.length - 1)) * 2.0;
+    const radAtY = Math.sqrt(Math.max(0.0, 1.0 - y * y));
+    const theta = phiGolden * idx;
+
+    const rx = Math.round(Math.cos(theta) * radAtY * sphereRadius * 100) / 100;
+    const ry = Math.round(y * sphereRadius * 100) / 100;
+    const rz = Math.round(Math.sin(theta) * radAtY * sphereRadius * 100) / 100;
+
+    let color = '#64748b';
+    if (lang === 'Python') color = '#3b82f6';
+    else if (lang === 'TypeScript' || lang === 'JavaScript') color = '#38bdf8';
+    else if (lang === 'Rust') color = '#f59e0b';
+    else if (lang === 'Go') color = '#10b981';
+    else if (lang === 'C' || lang === 'C++') color = '#06b6d4';
+    else if (lang === 'Ruby' || lang === 'PHP') color = '#ec4899';
+    else if (lang === 'Jupyter Notebook') color = '#a855f7';
+
+    const risk = archived && issues > 20 ? 'critical' : archived || issues > 50 ? 'high' : stars > 1000 ? 'medium' : 'low';
+    const repoId = await computeDeterministicId(tenantId, 'Repository', 'github', name, defaultBranch);
+
+    if (!reposByLang[lang]) reposByLang[lang] = [];
+    reposByLang[lang].push({ name, id: repoId });
+
+    nodes.push({
+      id: repoId,
+      name,
+      kind: 'Repository',
+      cluster_group: `lang-${lang.toLowerCase().replace(/\s+/g, '-')}`,
+      x: rx,
+      y: ry,
+      z: rz,
+      radius: stars > 500 ? 4.5 : 3.2,
+      color_hint: color,
+      claim_state: 'observed',
+      risk_level: risk,
+      metrics: {
+        stars,
+        forks,
+        open_issues: issues,
+        language: lang,
+        archived,
+        description: r.description || `Repository ${name}`,
+        html_url: r.html_url || `https://github.com/${cleanOrg}/${name}`,
+        min_level: 0,
+      },
+    });
+
+    edges.push({
+      id: `edge-org-${name}`,
+      source: orgId,
+      target: repoId,
+      kind: 'CONTAINS',
+      claim_state: 'observed',
+      confidence: 1.0,
+    });
+
+    edges.push({
+      id: `edge-boundary-${name}`,
+      source: repoId,
+      target: tbInternalId,
+      kind: 'CROSSES_BOUNDARY',
+      claim_state: 'observed',
+      confidence: 1.0,
+    });
+
+    // Package
+    const pkgManager =
+      lang === 'Rust'
+        ? 'cargo'
+        : lang === 'TypeScript' || lang === 'JavaScript'
+        ? 'npm'
+        : lang === 'Python'
+        ? 'pypi'
+        : lang === 'Go'
+        ? 'go'
+        : 'generic';
+    const pkgId = await computeDeterministicId(tenantId, 'Package', pkgManager, `${cleanOrg}/${name}`, 'pkg');
+    nodes.push({
+      id: pkgId,
+      name: `pkg:${name}`,
+      kind: 'Package',
+      cluster_group: `lang-${lang.toLowerCase().replace(/\s+/g, '-')}`,
+      x: Math.round(rx * 0.92 * 100) / 100,
+      y: Math.round((ry * 0.92 + 2.0) * 100) / 100,
+      z: Math.round(rz * 0.92 * 100) / 100,
+      radius: 2.5,
+      color_hint: '#059669',
+      claim_state: 'inferred',
+      risk_level: 'low',
+      metrics: {
+        package_manager: pkgManager,
+        language: lang,
+        repo: name,
+        min_level: 1,
+      },
+    });
+
+    edges.push({
+      id: `edge-pkg-${name}`,
+      source: repoId,
+      target: pkgId,
+      kind: 'CONTAINS',
+      claim_state: 'inferred',
+      confidence: 0.95,
+    });
+
+    if (archived) {
+      const findingId = await computeDeterministicId(tenantId, 'Finding', 'policy', `${cleanOrg}/${name}/archived`, 'v1');
+      nodes.push({
+        id: findingId,
+        name: `Archived Unmaintained: ${name}`,
+        kind: 'Finding',
+        cluster_group: 'vulnerabilities',
+        x: Math.round(rx * 1.08 * 100) / 100,
+        y: Math.round((ry * 1.08 + 3.0) * 100) / 100,
+        z: Math.round(rz * 1.08 * 100) / 100,
+        radius: 3.0,
+        color_hint: '#ef4444',
+        claim_state: 'observed',
+        risk_level: 'medium',
+        metrics: {
+          cvss: 5.3,
+          description: 'Repository is archived on GitHub; security vulnerabilities will not receive patches.',
+          min_level: 2,
+        },
+      });
+
+      edges.push({
+        id: `edge-finding-${name}`,
+        source: repoId,
+        target: findingId,
+        kind: 'EXPOSES',
+        claim_state: 'observed',
+        confidence: 1.0,
+      });
+    }
+  }
+
+  // Cross-repo dependencies
+  for (const lang of Object.keys(reposByLang)) {
+    const list = reposByLang[lang];
+    if (list.length > 1 && lang !== 'Config') {
+      for (let i = 0; i < list.length - 1; i++) {
+        edges.push({
+          id: `edge-dep-${list[i].name}-${list[i + 1].name}`,
+          source: list[i].id,
+          target: list[i + 1].id,
+          kind: 'DEPENDS_ON',
+          claim_state: 'inferred',
+          confidence: 0.7,
+        });
+      }
+    }
+  }
+
+  const result: UniverseTileResponse = {
+    org_id: orgId,
+    org_name: cleanOrg,
+    level: 0,
+    nodes,
+    edges,
+  };
+
+  cachedUniverse = result;
+  onProgress?.(`Grafo OSAKG construído com sucesso! (${nodes.length} nós, ${edges.length} conexões)`);
+  return result;
+}
 
 export async function fetchUniverseTiles(level = 0): Promise<UniverseTileResponse> {
   // 1. Try local live Anthropic universe dataset

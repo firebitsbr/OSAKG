@@ -18,6 +18,7 @@ interface CommandPaletteProps {
   onSelectNode: (node: UniverseNodeSpatial) => void;
   theme: UITheme;
   nodeColors: NodeColors;
+  onOpenIngestModal?: () => void;
 }
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
@@ -27,6 +28,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   onSelectNode,
   theme,
   nodeColors,
+  onOpenIngestModal,
 }) => {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -156,6 +158,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         {/* Results List */}
         <div style={{ maxHeight: '380px', overflowY: 'auto', padding: '6px' }}>
+          {onOpenIngestModal && (
+            <div
+              onClick={() => {
+                onClose();
+                onOpenIngestModal();
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                border: '1px dashed rgba(56, 189, 248, 0.4)',
+                marginBottom: '6px',
+                cursor: 'pointer',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Globe size={16} color="#38bdf8" />
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#38bdf8' }}>
+                  + Ingerir Nova Organização GitHub...
+                </span>
+              </div>
+              <span style={{ fontSize: '11px', color: theme.textMuted }}>Carregar repositórios</span>
+            </div>
+          )}
           {filtered.length === 0 ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: theme.textMuted, fontSize: '13px' }}>
               Nenhum ativo encontrado para "{query}"

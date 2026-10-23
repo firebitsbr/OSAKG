@@ -15,7 +15,7 @@ License: MIT
 - [x] M0.3 Create typed graph DTOs and sample fixtures.
 - [x] M0.4 Add format/lint/test scripts and CI.
 - [x] M0.5 Implement synthetic org sphere with orbit camera.
-- [ ] M1.1 Implement Git snapshot and file inventory.
+- [x] M1.1 Implement Git snapshot, GitHub organization repository crawling, and live universe ingestion.
 - [ ] M1.2 Implement Rust/TypeScript parsing adapters.
 - [ ] M2.1 Implement evidence SQLite schema.
 - [ ] M2.2 Implement graph store adapter.

@@ -99,6 +99,25 @@ fn ingest_fixtures(
         .map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+fn ingest_github_org(
+    state: State<'_, Arc<Mutex<AppState>>>,
+    org_name: String,
+    repos_json: Vec<serde_json::Value>,
+) -> Result<IngestionJobResponse, String> {
+    let s = state.lock().map_err(|e| e.to_string())?;
+    let scope = ScopeRecord::new_passive(
+        &s.tenant_id,
+        &org_name,
+        "desktop-operator",
+        vec!["*".to_string()],
+    );
+    let engine = IngestionEngine::new(s.graph.clone(), s.evidence.clone());
+    engine
+        .ingest_github_repositories(&scope, &org_name, &repos_json)
+        .map_err(|e| e.to_string())
+}
+
 fn main() {
     let graph = InMemoryGraphStore::new();
     let evidence = EvidenceStore::in_memory().expect("SQLite in-memory init failed");
@@ -131,7 +150,8 @@ fn main() {
             get_universe_tiles,
             get_neighborhood,
             get_evidence,
-            ingest_fixtures
+            ingest_fixtures,
+            ingest_github_org
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -16,6 +16,7 @@ import { EnterpriseHeader, KindFilter } from './components/EnterpriseHeader';
 import { Breadcrumbs } from './components/Breadcrumbs';
 import { ColorCustomizerModal } from './components/ColorCustomizerModal';
 import { CommandPalette } from './components/CommandPalette';
+import { IngestOrgModal } from './components/IngestOrgModal';
 import {
   ThemeMode,
   PresetPaletteId,
@@ -52,6 +53,7 @@ export const App: React.FC = () => {
   });
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [isIngestModalOpen, setIsIngestModalOpen] = useState(false);
 
   const theme = useMemo(() => getUITheme(themeMode), [themeMode]);
 
@@ -241,6 +243,8 @@ export const App: React.FC = () => {
         themeMode={themeMode}
         onToggleThemeMode={toggleThemeMode}
         onOpenColorModal={() => setIsColorModalOpen(true)}
+        onOpenIngestModal={() => setIsIngestModalOpen(true)}
+        tenantName={universe?.org_name}
       />
 
       {/* Main View Area (Offset for Header + Floating Ribbon) */}
@@ -329,6 +333,18 @@ export const App: React.FC = () => {
         onSelectNode={(node) => setSelectedNode(node)}
         theme={theme}
         nodeColors={activeNodeColors}
+        onOpenIngestModal={() => setIsIngestModalOpen(true)}
+      />
+
+      {/* Universal Organization Ingestion Modal */}
+      <IngestOrgModal
+        isOpen={isIngestModalOpen}
+        onClose={() => setIsIngestModalOpen(false)}
+        onIngestSuccess={(newUniverse) => {
+          setUniverse(newUniverse);
+          setSelectedNode(null);
+        }}
+        theme={theme}
       />
     </div>
   );

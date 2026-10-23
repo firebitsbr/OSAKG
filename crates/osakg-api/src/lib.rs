@@ -48,6 +48,7 @@ pub struct IngestionRequest {
     pub path: Option<String>,
     pub org_name: Option<String>,
     pub approved_repos: Option<Vec<String>>,
+    pub github_repos: Option<Vec<serde_json::Value>>,
 }
 
 pub fn create_router(state: AppState) -> Router {
@@ -98,6 +99,25 @@ async fn ingest_handler(
         .org_name
         .unwrap_or_else(|| "Synthetic Security Org".to_string());
 
+    let engine = IngestionEngine::new(state.graph.clone(), state.evidence.clone());
+
+    if let Some(repos) = payload.github_repos {
+        let approved = payload
+            .approved_repos
+            .unwrap_or_else(|| vec!["*".to_string()]);
+        let scope = ScopeRecord::new_passive(
+            &state.tenant_id,
+            &org_name,
+            "github-ingest-operator",
+            approved,
+        );
+        let res = engine
+            .ingest_github_repositories(&scope, &org_name, &repos)
+            .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+
+        return Ok((StatusCode::ACCEPTED, Json(res)));
+    }
+
     let (scope, target_path) = if let Some(p) = payload.path {
         let approved = payload
             .approved_repos
@@ -115,7 +135,6 @@ async fn ingest_handler(
         (s, p)
     };
 
-    let engine = IngestionEngine::new(state.graph.clone(), state.evidence.clone());
     let res = engine
         .ingest_fixture_directory(&scope, &target_path)
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
@@ -183,11 +202,16 @@ async fn universe_tiles_handler(
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
 
     if tiles.nodes.is_empty() {
-        for path in &[
-            "data/anthropics_universe.json",
-            "../data/anthropics_universe.json",
-            "apps/web/public/anthropics_universe.json",
-        ] {
+        let org_clean = org_id.to_lowercase();
+        let possible_paths = [
+            format!("data/{}_universe.json", org_clean),
+            format!("../data/{}_universe.json", org_clean),
+            format!("apps/web/public/{}_universe.json", org_clean),
+            "data/anthropics_universe.json".to_string(),
+            "../data/anthropics_universe.json".to_string(),
+            "apps/web/public/anthropics_universe.json".to_string(),
+        ];
+        for path in &possible_paths {
             if let Ok(bytes) = std::fs::read(path) {
                 if let Ok(data) = serde_json::from_slice::<serde_json::Value>(&bytes) {
                     return Ok(Json(data));

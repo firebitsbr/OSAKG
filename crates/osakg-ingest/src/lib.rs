@@ -829,6 +829,311 @@ impl<G: GraphStore> IngestionEngine<G> {
             errors,
         })
     }
+
+    /// Ingests arbitrary GitHub organization repositories provided as JSON metadata,
+    /// constructing the organization node, repositories, packages, trust boundaries,
+    /// security findings, and heuristic cross-repo dependencies adhering to OSAKG rules.
+    pub fn ingest_github_repositories(
+        &self,
+        scope: &ScopeRecord,
+        org_name: &str,
+        repos: &[serde_json::Value],
+    ) -> Result<IngestionJobResponse> {
+        let tenant_id = &scope.tenant_id;
+        let job_id = format!("job-{}", uuid::Uuid::new_v4());
+
+        // 1. Central Organization Node
+        let org_node = GraphNode::new(
+            tenant_id,
+            NodeKind::Organization,
+            "github_org",
+            org_name,
+            org_name,
+            "snapshot-live",
+            ClaimState::Observed,
+            1.0,
+            vec![],
+            serde_json::json!({
+                "scope_id": scope.id,
+                "public_repos": repos.len(),
+                "provider": "github",
+            }),
+        );
+        self.graph_store.upsert_node(org_node.clone())?;
+
+        // 2. Global Trust Boundaries
+        let tb_public = GraphNode::new(
+            tenant_id,
+            NodeKind::TrustBoundary,
+            "perimeter",
+            "TrustBoundary::PublicInternet",
+            "Public Internet Edge",
+            "v1",
+            ClaimState::Observed,
+            1.0,
+            vec![],
+            serde_json::json!({ "zone": "untrusted_public", "ingress_tier": "dmz" }),
+        );
+        self.graph_store.upsert_node(tb_public.clone())?;
+
+        let tb_internal = GraphNode::new(
+            tenant_id,
+            NodeKind::TrustBoundary,
+            "perimeter",
+            "TrustBoundary::OrganizationMesh",
+            format!("{} Internal Mesh", org_name),
+            "v1",
+            ClaimState::Observed,
+            1.0,
+            vec![],
+            serde_json::json!({ "zone": "org_internal_mesh", "org": org_name }),
+        );
+        self.graph_store.upsert_node(tb_internal.clone())?;
+
+        let tb_data = GraphNode::new(
+            tenant_id,
+            NodeKind::TrustBoundary,
+            "perimeter",
+            "TrustBoundary::SecureDataTier",
+            "Secure Database & Secrets Tier",
+            "v1",
+            ClaimState::Observed,
+            1.0,
+            vec![],
+            serde_json::json!({ "zone": "isolated_data_tier" }),
+        );
+        self.graph_store.upsert_node(tb_data.clone())?;
+
+        let mut repos_indexed = 0;
+        let mut nodes_created = 4; // Org + 3 Boundaries
+        let mut edges_created = 0;
+        let errors = Vec::new();
+
+        let mut repo_nodes_by_lang: std::collections::HashMap<String, Vec<GraphNode>> =
+            std::collections::HashMap::new();
+
+        for repo in repos {
+            let name = match repo.get("name").and_then(|v| v.as_str()) {
+                Some(n) => n.to_string(),
+                None => continue,
+            };
+
+            if !scope.is_repo_allowed(&name) {
+                continue;
+            }
+
+            let lang = repo
+                .get("language")
+                .and_then(|v| v.as_str())
+                .unwrap_or("Unknown")
+                .to_string();
+            let default_branch = repo
+                .get("default_branch")
+                .and_then(|v| v.as_str())
+                .unwrap_or("main");
+            let stars = repo
+                .get("stargazers_count")
+                .and_then(|v| v.as_u64())
+                .unwrap_or(0);
+            let forks = repo
+                .get("forks_count")
+                .and_then(|v| v.as_u64())
+                .unwrap_or(0);
+            let open_issues = repo
+                .get("open_issues_count")
+                .and_then(|v| v.as_u64())
+                .unwrap_or(0);
+            let is_archived = repo
+                .get("archived")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+            let description = repo
+                .get("description")
+                .and_then(|v| v.as_str())
+                .unwrap_or("");
+            let html_url = repo.get("html_url").and_then(|v| v.as_str()).unwrap_or("");
+
+            // Evidence for Repository
+            let ev_repo = EvidenceRecord::new_observed(
+                tenant_id,
+                &name,
+                default_branch,
+                None,
+                None,
+                None,
+                "osakg-github-ingest",
+            );
+            self.evidence_store.insert_evidence(&ev_repo)?;
+
+            let repo_node = GraphNode::new(
+                tenant_id,
+                NodeKind::Repository,
+                "github",
+                format!("{}/{}", org_name, name),
+                &name,
+                default_branch,
+                ClaimState::Observed,
+                1.0,
+                vec![ev_repo.id.clone()],
+                serde_json::json!({
+                    "language": lang,
+                    "stars": stars,
+                    "forks": forks,
+                    "open_issues": open_issues,
+                    "archived": is_archived,
+                    "description": description,
+                    "html_url": html_url,
+                }),
+            );
+            self.graph_store.upsert_node(repo_node.clone())?;
+            nodes_created += 1;
+            repos_indexed += 1;
+
+            repo_nodes_by_lang
+                .entry(lang.clone())
+                .or_default()
+                .push(repo_node.clone());
+
+            // Org -> CONTAINS -> Repo
+            let org_edge = GraphEdge::new(
+                tenant_id,
+                EdgeKind::Contains,
+                org_node.id.clone(),
+                repo_node.id.clone(),
+                ClaimState::Observed,
+                1.0,
+                vec![ev_repo.id.clone()],
+                serde_json::json!({}),
+            );
+            self.graph_store.upsert_edge(org_edge)?;
+            edges_created += 1;
+
+            // Repo -> CrossesBoundary -> Internal Mesh
+            let boundary_edge = GraphEdge::new(
+                tenant_id,
+                EdgeKind::CrossesBoundary,
+                repo_node.id.clone(),
+                tb_internal.id.clone(),
+                ClaimState::Observed,
+                1.0,
+                vec![ev_repo.id.clone()],
+                serde_json::json!({}),
+            );
+            self.graph_store.upsert_edge(boundary_edge)?;
+            edges_created += 1;
+
+            // Generate Primary Package Node for repository
+            let pkg_manager = match lang.as_str() {
+                "Rust" => "cargo",
+                "TypeScript" | "JavaScript" => "npm",
+                "Python" => "pypi",
+                "Go" => "go",
+                "Java" | "Kotlin" => "maven",
+                _ => "generic",
+            };
+
+            let pkg_node = GraphNode::new(
+                tenant_id,
+                NodeKind::Package,
+                pkg_manager,
+                format!("{}/{}::{}", org_name, name, name),
+                &name,
+                default_branch,
+                ClaimState::Inferred,
+                0.95,
+                vec![ev_repo.id.clone()],
+                serde_json::json!({
+                    "package_manager": pkg_manager,
+                    "language": lang,
+                }),
+            );
+            self.graph_store.upsert_node(pkg_node.clone())?;
+            nodes_created += 1;
+
+            // Repo -> CONTAINS -> Package
+            let pkg_edge = GraphEdge::new(
+                tenant_id,
+                EdgeKind::Contains,
+                repo_node.id.clone(),
+                pkg_node.id.clone(),
+                ClaimState::Inferred,
+                0.95,
+                vec![ev_repo.id.clone()],
+                serde_json::json!({}),
+            );
+            self.graph_store.upsert_edge(pkg_edge)?;
+            edges_created += 1;
+
+            // If repository is archived, create a security finding
+            if is_archived {
+                let finding_node = GraphNode::new(
+                    tenant_id,
+                    NodeKind::Finding,
+                    "osakg-policy",
+                    format!("{}/{}/Finding::ArchivedUnmaintained", org_name, name),
+                    "Archived / Unmaintained Repository",
+                    default_branch,
+                    ClaimState::Observed,
+                    1.0,
+                    vec![ev_repo.id.clone()],
+                    serde_json::json!({
+                        "severity": "medium",
+                        "cvss": 5.3,
+                        "description": "Repository is archived on GitHub; security vulnerabilities will not receive patches.",
+                    }),
+                );
+                self.graph_store.upsert_node(finding_node.clone())?;
+                nodes_created += 1;
+
+                let finding_edge = GraphEdge::new(
+                    tenant_id,
+                    EdgeKind::Exposes,
+                    repo_node.id.clone(),
+                    finding_node.id.clone(),
+                    ClaimState::Observed,
+                    1.0,
+                    vec![ev_repo.id.clone()],
+                    serde_json::json!({}),
+                );
+                self.graph_store.upsert_edge(finding_edge)?;
+                edges_created += 1;
+            }
+        }
+
+        // Cross-repository heuristic connections (Rule 6 & 7: ClaimState::Inferred, confidence < 1.0)
+        for (lang, r_nodes) in &repo_nodes_by_lang {
+            if r_nodes.len() > 1 && lang != "Unknown" {
+                for window in r_nodes.windows(2) {
+                    let dep_edge = GraphEdge::new(
+                        tenant_id,
+                        EdgeKind::DependsOn,
+                        window[0].id.clone(),
+                        window[1].id.clone(),
+                        ClaimState::Inferred,
+                        0.75,
+                        vec![],
+                        serde_json::json!({
+                            "reason": "Shared ecosystem language and organizational component clustering",
+                            "ecosystem": lang,
+                        }),
+                    );
+                    self.graph_store.upsert_edge(dep_edge)?;
+                    edges_created += 1;
+                }
+            }
+        }
+
+        Ok(IngestionJobResponse {
+            job_id,
+            tenant_id: tenant_id.to_string(),
+            state: "completed".to_string(),
+            repositories_indexed: repos_indexed,
+            files_indexed: 0,
+            nodes_created,
+            edges_created,
+            errors,
+        })
+    }
 }
 
 #[cfg(test)]
@@ -868,5 +1173,90 @@ mod tests {
             .unwrap();
         assert!(tiles.nodes.len() >= 25);
         assert!(tiles.edges.len() >= 25);
+    }
+
+    #[test]
+    fn test_ingest_github_repositories() {
+        let graph = InMemoryGraphStore::new();
+        let evidence = EvidenceStore::in_memory().unwrap();
+        let engine = IngestionEngine::new(graph.clone(), evidence.clone());
+
+        let scope = ScopeRecord::new_passive(
+            "tenant-gh-test",
+            "Pallets Org",
+            "security-auditor",
+            vec!["*".to_string()],
+        );
+
+        let repos = serde_json::json!([
+            {
+                "name": "flask",
+                "language": "Python",
+                "default_branch": "main",
+                "stargazers_count": 68000,
+                "forks_count": 16000,
+                "open_issues_count": 25,
+                "archived": false,
+                "description": "The Python micro framework for building web applications.",
+                "html_url": "https://github.com/pallets/flask"
+            },
+            {
+                "name": "werkzeug",
+                "language": "Python",
+                "default_branch": "main",
+                "stargazers_count": 7500,
+                "forks_count": 1800,
+                "open_issues_count": 12,
+                "archived": false,
+                "description": "The comprehensive WSGI web application library.",
+                "html_url": "https://github.com/pallets/werkzeug"
+            },
+            {
+                "name": "jinja",
+                "language": "Python",
+                "default_branch": "main",
+                "stargazers_count": 10500,
+                "forks_count": 1900,
+                "open_issues_count": 8,
+                "archived": false,
+                "description": "A very fast and expressive template engine.",
+                "html_url": "https://github.com/pallets/jinja"
+            },
+            {
+                "name": "legacy-tool",
+                "language": "Python",
+                "default_branch": "master",
+                "stargazers_count": 120,
+                "forks_count": 15,
+                "open_issues_count": 3,
+                "archived": true,
+                "description": "Old deprecated tooling.",
+                "html_url": "https://github.com/pallets/legacy-tool"
+            }
+        ]);
+
+        let repos_array = repos.as_array().unwrap();
+        let res = engine
+            .ingest_github_repositories(&scope, "pallets", repos_array)
+            .expect("Ingesting github repositories should succeed");
+
+        assert_eq!(res.state, "completed");
+        assert_eq!(res.repositories_indexed, 4);
+        assert!(res.nodes_created >= 12);
+        assert!(res.edges_created >= 12);
+
+        // Verify that 3D universe tiles can be generated directly from the ingested graph
+        let tiles = graph
+            .get_universe_tiles("tenant-gh-test", "pallets", 0)
+            .unwrap();
+        assert_eq!(tiles.nodes.len(), res.nodes_created);
+        assert_eq!(tiles.edges.len(), res.edges_created);
+
+        // Check finding for archived repo
+        let has_finding = tiles.nodes.iter().any(|n| n.kind == NodeKind::Finding);
+        assert!(
+            has_finding,
+            "Archived repository should produce a security finding"
+        );
     }
 }
