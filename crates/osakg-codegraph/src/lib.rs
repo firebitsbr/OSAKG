@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Language-specific AST parsing, symbol extraction, and call graph builders
+// License: MIT
+// =====================================================================
+
 use osakg_core::{NodeKind, Result};
 
 #[derive(Debug, Clone)]

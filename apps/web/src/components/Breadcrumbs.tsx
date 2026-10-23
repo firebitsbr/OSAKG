@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Hierarchical breadcrumb navigation component reflecting zoom altitude
+// License: MIT
+// =====================================================================
+
 import React from 'react';
 import { ChevronRight, Home } from 'lucide-react';
 import { UniverseNodeSpatial } from '../types';

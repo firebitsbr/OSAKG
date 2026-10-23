@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Petgraph wrapper, spatial indexing, and semantic zoom query layer
+// License: MIT
+// =====================================================================
+
 use osakg_core::{
     GraphEdge, GraphNode, NeighborhoodResponse, NodeId, NodeKind, Result, UniverseEdgeSpatial,
     UniverseNodeSpatial, UniverseTileResponse,

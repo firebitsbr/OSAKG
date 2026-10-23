@@ -1,3 +1,11 @@
+# =====================================================================
+# Author: Mauro Risonho de Paula Assumpção
+# Create: 2026-10-18
+# Update: 2026-10-23
+# Short Description: Cargo manifest for tree-sitter AST and code intelligence extraction
+# License: MIT
+# =====================================================================
+
 [package]
 name = "osakg-codegraph"
 version.workspace = true

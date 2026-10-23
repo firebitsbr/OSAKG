@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Synthetic billing service entrypoint for testing code parsing
+// License: MIT
+// =====================================================================
+
 // Synthetic Billing Service - Ground Truth Fixture
 // Exposes /api/v1/billing/invoices, verifies auth token, writes to BillingDatabase
 

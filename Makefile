@@ -1,3 +1,11 @@
+# =====================================================================
+# Author: Mauro Risonho de Paula Assumpção
+# Create: 2026-10-18
+# Update: 2026-10-23
+# Short Description: Top-level orchestration Makefile for building, testing, linting, and running OSAKG
+# License: MIT
+# =====================================================================
+
 # ==============================================================================
 # OSAKG — Offensive Security Knowledge Graph Makefile
 # ==============================================================================

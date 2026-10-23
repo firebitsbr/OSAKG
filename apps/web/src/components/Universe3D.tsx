@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Three.js 3D semantic zoom universe explorer with orbital camera and LOD
+// License: MIT
+// =====================================================================
+
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { UniverseNodeSpatial, UniverseEdgeSpatial, ClaimState } from '../types';

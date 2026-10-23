@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Synthetic authentication service entrypoint for testing code parsing
+// License: MIT
+// =====================================================================
+
 // Synthetic Auth Service - Ground Truth Fixture
 // Exposes /api/v1/auth/login and /api/v1/auth/verify
 

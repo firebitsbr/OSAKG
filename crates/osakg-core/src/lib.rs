@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: OSAKG core domain library root aggregating models and traits
+// License: MIT
+// =====================================================================
+
 pub mod dto;
 pub mod edge;
 pub mod error;

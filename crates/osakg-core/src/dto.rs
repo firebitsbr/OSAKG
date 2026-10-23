@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Data transfer objects for frontend serialization and API wire protocols
+// License: MIT
+// =====================================================================
+
 use crate::edge::GraphEdge;
 use crate::evidence::ClaimState;
 use crate::id::NodeId;

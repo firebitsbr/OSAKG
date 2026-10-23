@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Milestone M0 execution report, verification results, and initial benchmarks
+License: MIT
+=====================================================================
+-->
+
 # Milestone M0 Execution Report: Repository Skeleton & 3D Universe Explorer
 
 **Date:** 2026-10-18  

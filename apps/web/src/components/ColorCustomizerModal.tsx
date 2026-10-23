@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Corporate color theme customizer modal with RGB and HSL palette adjustments
+// License: MIT
+// =====================================================================
+
 import React from 'react';
 import { X, RotateCcw, Palette, Sun, Moon } from 'lucide-react';
 import { NodeColors, PresetPaletteId, PRESET_NODE_COLORS, ThemeMode, UITheme } from '../theme';

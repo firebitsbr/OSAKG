@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Bootstrap prompt template for initializing new agent sessions
+License: MIT
+=====================================================================
+-->
+
 # OpenCode / Antigravity — Bootstrap prompt
 
 You are implementing OSAKG in this VS Code workspace. Read `AGENTS.md`, `HARNESS.md`, `SCOPE.md`, `ARCHITECTURE.md`, `GRAPH_SCHEMA.md`, `UNIVERSE_3D.md`, `ROADMAP.md`, `TESTING.md` and `TASKS.md` before changing code.

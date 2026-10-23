@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+# =====================================================================
+# Author: Mauro Risonho de Paula Assumpção
+# Create: 2026-10-18
+# Update: 2026-10-23
+# Short Description: Public GitHub API ingestion crawler for Anthropic organization repositories
+# License: MIT
+# =====================================================================
+
 """
 OSAKG Anthropic Live Ingestion Pipeline
 Fetches all public repositories from https://github.com/orgs/anthropics/repositories,

@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Synthetic AI agent repository entrypoint for testing code parsing
+// License: MIT
+// =====================================================================
+
 // Synthetic AI Agent - Ground Truth Fixture
 // Models an AI Agent with tool permissions and cross-boundary tool execution
 

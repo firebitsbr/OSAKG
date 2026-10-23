@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Formal knowledge graph schema for nodes, edges, scopes, and provenance evidence
+License: MIT
+=====================================================================
+-->
+
 # GRAPH_SCHEMA.md — Canonical evidence graph v0.1
 
 ## Identity

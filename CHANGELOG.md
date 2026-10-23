@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Release notes, versioning history, and milestone progress log
+License: MIT
+=====================================================================
+-->
+
 # Changelog
 
 ## 0.3.0 — Enterprise UI, Continuous Google-Earth Zoom & Massive Deep AST

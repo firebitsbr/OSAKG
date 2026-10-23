@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Client API wrapper supporting REST endpoints and mock fallback data
+// License: MIT
+// =====================================================================
+
 import { UniverseTileResponse, NeighborhoodResponse, EvidenceRecord } from './types';
 
 // Synthetic ground truth fallback dataset (20+ nodes representing org sphere)

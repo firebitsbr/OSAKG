@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: REST, WebSocket, and Tauri IPC contract specification for backend and frontend communication
+License: MIT
+=====================================================================
+-->
+
 # API_CONTRACT.md — Initial HTTP interface
 
 All endpoints are versioned under `/api/v1`; local bind default `127.0.0.1`; auth/tenant authorization required before remote deployment.

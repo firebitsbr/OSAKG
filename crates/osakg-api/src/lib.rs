@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: REST router definitions, WebSocket stream handlers, and state management
+// License: MIT
+// =====================================================================
+
 use axum::{
     extract::{Path as AxumPath, Query, State},
     http::StatusCode,

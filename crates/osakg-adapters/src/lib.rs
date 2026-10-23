@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Scanner adapter abstractions and output normalization parsers
+// License: MIT
+// =====================================================================
+
 pub struct OpengrepAdapter;
 pub struct OsvScannerAdapter;
 pub struct JoernAdapter;

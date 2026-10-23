@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Keyboard-driven spotlight command palette (Ctrl+K) for quick navigation
+// License: MIT
+// =====================================================================
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, CornerDownLeft, ShieldAlert, Code, Folder, Database, Globe } from 'lucide-react';
 import { UniverseNodeSpatial } from '../types';

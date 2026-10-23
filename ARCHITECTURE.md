@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Comprehensive system architecture, crate boundaries, dataflows, and security design
+License: MIT
+=====================================================================
+-->
+
 # ARCHITECTURE.md — System design
 
 ## Logical pipeline

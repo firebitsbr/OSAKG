@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Project boundaries, defensive security mission, and scope restrictions
+License: MIT
+=====================================================================
+-->
+
 # SCOPE.md — Authorization and boundaries
 
 ## Default mode

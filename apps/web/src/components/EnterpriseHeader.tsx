@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Corporate enterprise header with search, theme switch, and status metrics
+// License: MIT
+// =====================================================================
+
 import React from 'react';
 import { Shield, Search, Layers, RefreshCw, Sun, Moon, Palette, ShieldAlert, Filter, Activity } from 'lucide-react';
 import { ClaimState } from '../types';

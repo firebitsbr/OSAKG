@@ -1,3 +1,11 @@
+# =====================================================================
+# Author: Mauro Risonho de Paula Assumpção
+# Create: 2026-10-18
+# Update: 2026-10-23
+# Short Description: Top-level Cargo workspace manifest defining all OSAKG backend crates
+# License: MIT
+# =====================================================================
+
 [workspace]
 resolver = "2"
 members = [

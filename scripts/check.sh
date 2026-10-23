@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# =====================================================================
+# Author: Mauro Risonho de Paula Assumpção
+# Create: 2026-10-18
+# Update: 2026-10-23
+# Short Description: Comprehensive verification script executing format, lint, test, and build suites
+# License: MIT
+# =====================================================================
+
 set -euo pipefail
 
 echo "=== [1/5] Cargo Format Check ==="

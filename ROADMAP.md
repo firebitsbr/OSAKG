@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Milestone delivery timeline, vertical slice roadmap, and strategic objectives
+License: MIT
+=====================================================================
+-->
+
 # ROADMAP.md — Incremental delivery
 
 ## M0: Repository skeleton

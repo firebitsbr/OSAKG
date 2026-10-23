@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: TypeScript interfaces matching OSAKG Rust backend graph models and DTOs
+// License: MIT
+// =====================================================================
+
 export type ClaimState = 'observed' | 'inferred' | 'validated' | 'refuted';
 
 export interface UniverseNodeSpatial {

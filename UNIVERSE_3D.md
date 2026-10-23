@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: 3D semantic zoom visualization design and spatial layout specifications
+License: MIT
+=====================================================================
+-->
+
 # UNIVERSE_3D.md — Google-Earth-inspired repository universe
 
 ## Experience

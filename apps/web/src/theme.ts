@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Theme state manager supporting dark/light modes and 5 enterprise color presets
+// License: MIT
+// =====================================================================
+
 export type ThemeMode = 'dark' | 'light';
 
 export type PresetPaletteId = 'enterprise_soc' | 'cyberpunk' | 'matrix' | 'synthwave' | 'nordic';

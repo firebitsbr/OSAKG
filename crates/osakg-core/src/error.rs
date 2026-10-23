@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Unified error types and result aliases for OSAKG crates
+// License: MIT
+// =====================================================================
+
 use thiserror::Error;
 
 #[derive(Error, Debug)]

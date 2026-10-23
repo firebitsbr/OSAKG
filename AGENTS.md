@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Operational guidelines, safety constraints, and mission directives for coding agents
+License: MIT
+=====================================================================
+-->
+
 # AGENTS.md — Instructions for all coding agents
 
 ## Mission

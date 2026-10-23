@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Architecture and contracts for AI-assisted red teaming and autonomous exploit generation guardrails
+License: MIT
+=====================================================================
+-->
+
 # AI_REDTEAM.md — AI system graph modeling
 
 ## Entities

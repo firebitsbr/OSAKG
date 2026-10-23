@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Architecture Decision Records (ADRs) capturing key engineering trade-offs
+License: MIT
+=====================================================================
+-->
+
 # DECISIONS.md — Architecture decision records
 
 ## ADR-001: Independent Rust core

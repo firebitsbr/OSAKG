@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Slide-over inspector drawer displaying node details, CVSS, and provenance
+// License: MIT
+// =====================================================================
+
 import React, { useEffect, useState } from 'react';
 import { UniverseNodeSpatial, EvidenceRecord, NeighborhoodResponse } from '../types';
 import { fetchEvidence, fetchNeighborhood } from '../api';

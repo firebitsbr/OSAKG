@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Actionable task tracking list and milestone status for engineering agents
+License: MIT
+=====================================================================
+-->
+
 # TASKS.md — Work queue
 
 - [x] M0.1 Create Rust workspace and crate boundaries.

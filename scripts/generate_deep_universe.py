@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+# =====================================================================
+# Author: Mauro Risonho de Paula Assumpção
+# Create: 2026-10-18
+# Update: 2026-10-23
+# Short Description: Synthetic deep universe generator creating granular AST nodes and attack paths
+# License: MIT
+# =====================================================================
+
 """
 OSAKG Deep Universe Generator
 Generates a massive, high-fidelity, hierarchical 3D semantic knowledge graph (1,200+ nodes)

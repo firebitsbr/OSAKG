@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Disjoint-set entity resolution and heuristic cross-repository link fusion
+// License: MIT
+// =====================================================================
+
 use osakg_core::{ClaimState, EdgeKind, GraphEdge, NodeId, Result};
 use osakg_graph::GraphStore;
 

@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Scope hierarchy definitions from Enterprise to AstEntity levels
+// License: MIT
+// =====================================================================
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 

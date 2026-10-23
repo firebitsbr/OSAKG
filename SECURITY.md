@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Security posture, safe analysis bounds, vulnerability disclosure, and privacy guarantees
+License: MIT
+=====================================================================
+-->
+
 # SECURITY.md — Platform security
 
 ## Defaults

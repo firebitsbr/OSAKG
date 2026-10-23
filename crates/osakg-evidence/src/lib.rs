@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Evidence recording, validation ledger, and confidence computation
+// License: MIT
+// =====================================================================
+
 use chrono::Utc;
 use osakg_core::{ClaimState, EvidenceRecord, OsakgError, Result};
 use rusqlite::{params, Connection};

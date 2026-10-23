@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Main application component managing HUD, layout, themes, and views
+// License: MIT
+// =====================================================================
+
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { UniverseTileResponse, UniverseNodeSpatial, ClaimState } from './types';
 import { fetchUniverseTiles } from './api';

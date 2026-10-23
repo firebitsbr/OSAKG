@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Dijkstra/A* shortest path algorithms and security risk propagation evaluator
+// License: MIT
+// =====================================================================
+
 use osakg_core::{CandidatePath, NodeId, PathQueryResponse, Result};
 use osakg_graph::GraphStore;
 

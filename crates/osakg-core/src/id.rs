@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Deterministic identifier generation using SHA-256 for nodes and edges
+// License: MIT
+// =====================================================================
+
 use sha2::{Digest, Sha256};
 use std::fmt;
 

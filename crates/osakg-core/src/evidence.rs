@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Provenance tracking, confidence levels, and evidence claim data structures
+// License: MIT
+// =====================================================================
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 

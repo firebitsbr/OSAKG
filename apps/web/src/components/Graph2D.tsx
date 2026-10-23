@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Force-directed 2D canvas visualization fallback for graph inspection
+// License: MIT
+// =====================================================================
+
 import React from 'react';
 import { UniverseNodeSpatial, UniverseEdgeSpatial, ClaimState } from '../types';
 import { NodeColors, UITheme } from '../theme';

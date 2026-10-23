@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: CLI executable launching the standalone OSAKG API backend service
+// License: MIT
+// =====================================================================
+
 use osakg_api::{create_router, AppState};
 use osakg_evidence::EvidenceStore;
 use osakg_graph::InMemoryGraphStore;

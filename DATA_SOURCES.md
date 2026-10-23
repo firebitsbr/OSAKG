@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Catalog of supported passive code scanners, vulnerability feeds, and AST extractors
+License: MIT
+=====================================================================
+-->
+
 # DATA_SOURCES.md — Connectors and analyzers
 
 ## Inputs

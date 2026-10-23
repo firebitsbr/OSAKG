@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Vite bundler configuration with React and Tailwind plugins
+// License: MIT
+// =====================================================================
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 

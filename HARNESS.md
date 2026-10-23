@@ -1,3 +1,13 @@
+<!--
+=====================================================================
+Author: Mauro Risonho de Paula Assumpção
+Create: 2026-10-18
+Update: 2026-10-23
+Short Description: Testing methodology, synthetic org testbeds, and verification harness specification
+License: MIT
+=====================================================================
+-->
+
 # HARNESS.md — Autonomous engineering loop
 
 ## Harness objective

@@ -1,3 +1,11 @@
+// =====================================================================
+// Author: Mauro Risonho de Paula Assumpção
+// Create: 2026-10-18
+// Update: 2026-10-23
+// Short Description: Viewport navigation toolbar with zoom controls, centering, and perspective toggle
+// License: MIT
+// =====================================================================
+
 import React from 'react';
 import { ClaimState } from '../types';
 import { Globe, Layers, Search, RefreshCw, Filter, ShieldAlert, Sun, Moon, Palette } from 'lucide-react';
