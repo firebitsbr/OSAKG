@@ -52,27 +52,27 @@ OSAKG follows a decoupled, modular, local-first architecture:
 
 ```mermaid
 flowchart TD
-    subgraph Data Sources & Ingestion
-        GH[GitHub / Git Clones] --> Ingest[crates/osakg-ingest]
-        Pkg[Cargo / NPM / PyPI Manifests] --> Ingest
-        AST[Tree-Sitter Parsers] --> CodeGraph[crates/osakg-codegraph]
-        Scan[Semgrep / Gitleaks / Trivy] --> Adapters[crates/osakg-adapters]
+    subgraph Ingestion ["Data Sources & Ingestion"]
+        GH["GitHub / Git Clones"] --> Ingest["crates/osakg-ingest"]
+        Pkg["Cargo / NPM / PyPI Manifests"] --> Ingest
+        AST["Tree-Sitter Parsers"] --> CodeGraph["crates/osakg-codegraph"]
+        Scan["Semgrep / Gitleaks / Trivy"] --> Adapters["crates/osakg-adapters"]
     end
 
-    subgraph Core Graph Engine [Rust Workspace]
-        Ingest --> Fusion[crates/osakg-fusion]
+    subgraph CoreEngine ["Core Graph Engine (Rust Workspace)"]
+        Ingest --> Fusion["crates/osakg-fusion"]
         CodeGraph --> Fusion
         Adapters --> Fusion
-        Fusion --> Graph[crates/osakg-graph (Petgraph + FalkorDB)]
-        Evidence[crates/osakg-evidence (SQLite Ledger)] <--> Graph
-        Graph --> AttackPath[crates/osakg-attackpath]
-        Graph --> AIRedTeam[crates/osakg-ai-redteam]
-        Graph --> API[crates/osakg-api (Axum REST & WebSocket)]
+        Fusion --> Graph["crates/osakg-graph (Petgraph + FalkorDB)"]
+        Evidence["crates/osakg-evidence (SQLite Ledger)"] <--> Graph
+        Graph --> AttackPath["crates/osakg-attackpath"]
+        Graph --> AIRedTeam["crates/osakg-ai-redteam"]
+        Graph --> API["crates/osakg-api (Axum REST & WebSocket)"]
     end
 
-    subgraph Client Applications
-        API <--> Desktop[apps/desktop (Tauri 2 Runtime)]
-        API <--> Web[apps/web (React 18 + Three.js)]
+    subgraph Clients ["Client Applications"]
+        API <--> Desktop["apps/desktop (Tauri 2 Runtime)"]
+        API <--> Web["apps/web (React 18 + Three.js)"]
         Desktop --- Web
     end
 ```
@@ -81,16 +81,16 @@ flowchart TD
 
 | Crate | Description |
 |---|---|
-| [`osakg-core`](file:///home/test/Downloads/Github/Grafos/crates/osakg-core) | Core domain types, node/edge models, scopes, deterministic SHA-256 IDs, and DTOs |
-| [`osakg-graph`](file:///home/test/Downloads/Github/Grafos/crates/osakg-graph) | High-performance in-memory and persistent graph storage with spatial indexing |
-| [`osakg-ingest`](file:///home/test/Downloads/Github/Grafos/crates/osakg-ingest) | Repository walkers, package manifest parsers, and batch ingestion workers |
-| [`osakg-codegraph`](file:///home/test/Downloads/Github/Grafos/crates/osakg-codegraph) | Tree-sitter AST symbol extractors, function call graphs, and language analyzers |
-| [`osakg-adapters`](file:///home/test/Downloads/Github/Grafos/crates/osakg-adapters) | Parsers and normalizers for external scanners (Semgrep, Gitleaks, Trivy, OSV) |
-| [`osakg-fusion`](file:///home/test/Downloads/Github/Grafos/crates/osakg-fusion) | Entity resolution, disjoint-set deduplication, and cross-repo heuristic fusion |
-| [`osakg-evidence`](file:///home/test/Downloads/Github/Grafos/crates/osakg-evidence) | Cryptographic provenance vault and SQLite evidence verification ledger |
-| [`osakg-attackpath`](file:///home/test/Downloads/Github/Grafos/crates/osakg-attackpath) | Graph traversal, risk propagation evaluator, and Dijkstra/A* kill chain finder |
-| [`osakg-ai-redteam`](file:///home/test/Downloads/Github/Grafos/crates/osakg-ai-redteam) | Guardrailed AI red team simulation engine and threat hypothesis validator |
-| [`osakg-api`](file:///home/test/Downloads/Github/Grafos/crates/osakg-api) | Axum REST router, WebSocket real-time telemetry streaming, and CLI daemon |
+| [`osakg-core`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-core) | Core domain types, node/edge models, scopes, deterministic SHA-256 IDs, and DTOs |
+| [`osakg-graph`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-graph) | High-performance in-memory and persistent graph storage with spatial indexing |
+| [`osakg-ingest`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-ingest) | Repository walkers, package manifest parsers, and batch ingestion workers |
+| [`osakg-codegraph`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-codegraph) | Tree-sitter AST symbol extractors, function call graphs, and language analyzers |
+| [`osakg-adapters`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-adapters) | Parsers and normalizers for external scanners (Semgrep, Gitleaks, Trivy, OSV) |
+| [`osakg-fusion`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-fusion) | Entity resolution, disjoint-set deduplication, and cross-repo heuristic fusion |
+| [`osakg-evidence`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-evidence) | Cryptographic provenance vault and SQLite evidence verification ledger |
+| [`osakg-attackpath`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-attackpath) | Graph traversal, risk propagation evaluator, and Dijkstra/A* kill chain finder |
+| [`osakg-ai-redteam`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-ai-redteam) | Guardrailed AI red team simulation engine and threat hypothesis validator |
+| [`osakg-api`](file:///home/test/Downloads/Github/OSAKG/crates/osakg-api) | Axum REST router, WebSocket real-time telemetry streaming, and CLI daemon |
 
 ---
 
@@ -143,7 +143,7 @@ graph TD
 
 ### 1. Using the Orchestration Makefile
 
-The repository includes a comprehensive [`Makefile`](file:///home/test/Downloads/Github/Grafos/Makefile):
+The repository includes a comprehensive [`Makefile`](file:///home/test/Downloads/Github/OSAKG/Makefile):
 
 ```bash
 # Display full help menu of all available targets
@@ -210,7 +210,7 @@ OSAKG is an authorized defensive research platform adhering to strict safety inv
 3. **Evidence & Provenance Mandatory**: Every vulnerability claim or attack path edge must carry provenance metadata (`source`, `confidence`, `claim_type`). A structural dependency is never reported as an exploit without validated preconditions.
 4. **Gated Dynamic Validation**: Dynamic simulations and AI red teaming must be explicitly authorized and executed solely against local synthetic testbeds or allowlisted sandbox environments.
 
-For complete vulnerability reporting and security policies, see [`SECURITY.md`](file:///home/test/Downloads/Github/Grafos/SECURITY.md).
+For complete vulnerability reporting and security policies, see [`SECURITY.md`](file:///home/test/Downloads/Github/OSAKG/SECURITY.md).
 
 ---
 
@@ -230,7 +230,7 @@ OSAKG structures multi-repo code intelligence into standardized hierarchical ent
   - `Exploits` / `Traverses`: Attack step leverages a vulnerability to compromise next asset
   - `HasFinding`: Associates vulnerability or secret finding to a code symbol
 
-For detailed JSON schemas and Cypher examples, see [`GRAPH_SCHEMA.md`](file:///home/test/Downloads/Github/Grafos/GRAPH_SCHEMA.md).
+For detailed JSON schemas and Cypher examples, see [`GRAPH_SCHEMA.md`](file:///home/test/Downloads/Github/OSAKG/GRAPH_SCHEMA.md).
 
 ---
 
@@ -270,7 +270,7 @@ For detailed JSON schemas and Cypher examples, see [`GRAPH_SCHEMA.md`](file:///h
 
 ## 📜 License
 
-This project is licensed under the **MIT License**. See the [`LICENSE`](file:///home/test/Downloads/Github/Grafos/LICENSE) file for complete details.
+This project is licensed under the **MIT License**. See the [`LICENSE`](file:///home/test/Downloads/Github/OSAKG/LICENSE) file for complete details.
 
 ```
 Copyright (c) 2026 Mauro Risonho de Paula Assumpção
@@ -282,4 +282,4 @@ Copyright (c) 2026 Mauro Risonho de Paula Assumpção
 
 **Mauro Risonho de Paula Assumpção**  
 - GitHub: [@firebitsbr](https://github.com/firebitsbr)  
-- Repository: [https://github.com/firebitsbr/Grafos](https://github.com/firebitsbr/Grafos)
+- Repository: [https://github.com/firebitsbr/OSAKG](https://github.com/firebitsbr/OSAKG)

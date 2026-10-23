@@ -259,7 +259,7 @@ export const App: React.FC = () => {
               letterSpacing: '0.05em',
             }}
           >
-            INDEXANDO UNIVERSO DE GRAFOS DE SEGURANÇA...
+            INDEXANDO UNIVERSO OSAKG DE SEGURANÇA...
           </div>
         ) : universe ? (
           viewMode === '3D' ? (
