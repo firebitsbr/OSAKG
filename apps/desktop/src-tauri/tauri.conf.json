@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/dev/crates/tauri-cli/schema.json",
+  "productName": "OSAKG Desktop",
+  "version": "0.1.0",
+  "identifier": "com.osakg.desktop",
+  "build": {
+    "frontendDist": "../../web/dist",
+    "devUrl": "http://localhost:5173"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "OSAKG — Offensive Security Knowledge Graph",
+        "width": 1400,
+        "height": 900,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all"
+  }
+}
+

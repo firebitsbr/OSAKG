@@ -1,0 +1,38 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/osakg-core",
+    "crates/osakg-evidence",
+    "crates/osakg-graph",
+    "crates/osakg-ingest",
+    "crates/osakg-codegraph",
+    "crates/osakg-fusion",
+    "crates/osakg-attackpath",
+    "crates/osakg-ai-redteam",
+    "crates/osakg-adapters",
+    "crates/osakg-api",
+    "apps/desktop/src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["OSAKG Authors"]
+license = "Apache-2.0"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.7", features = ["v4", "serde"] }
+thiserror = "2.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tokio = { version = "1.38", features = ["full"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+axum = "0.7"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+tauri = { version = "2.0", features = [] }
+tauri-build = { version = "2.0", features = [] }
+

@@ -1,0 +1,20 @@
+{
+  "agent_id": "agent-finance-01",
+  "name": "Autonomous Finance Assistant",
+  "type": "AIAgent",
+  "model": "gpt-synthetic-audit-v1",
+  "tools": [
+    {
+      "name": "tool-fetch-invoice",
+      "target_service": "repo-billing",
+      "target_endpoint": "/api/v1/billing/invoices",
+      "trust_boundary": "ai-to-internal"
+    },
+    {
+      "name": "tool-execute-db-query",
+      "target_datastore": "BillingDatabase",
+      "trust_boundary": "ai-to-datastore"
+    }
+  ]
+}
+

@@ -1,0 +1,10 @@
+{
+  "name": "repo-auth",
+  "version": "1.0.0",
+  "description": "Synthetic authentication microservice fixture",
+  "main": "src/index.ts",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  }
+}
+

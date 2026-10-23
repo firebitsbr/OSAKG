@@ -1,0 +1,10 @@
+{
+  "name": "repo-billing",
+  "version": "1.0.0",
+  "description": "Synthetic billing microservice fixture",
+  "main": "src/index.ts",
+  "dependencies": {
+    "repo-auth": "^1.0.0"
+  }
+}
+

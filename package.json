@@ -1,0 +1,18 @@
+{
+  "name": "osakg-root",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm --workspace=apps/web run dev",
+    "build": "npm --workspace=apps/web run build",
+    "lint": "npm --workspace=apps/web run lint",
+    "typecheck": "npm --workspace=apps/web run typecheck",
+    "test": "npm --workspace=apps/web run test",
+    "desktop:dev": "npx @tauri-apps/cli dev",
+    "desktop:build": "npx @tauri-apps/cli build"
+  }
+}
+

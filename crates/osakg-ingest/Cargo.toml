@@ -1,0 +1,17 @@
+[package]
+name = "osakg-ingest"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+osakg-core = { path = "../osakg-core" }
+osakg-graph = { path = "../osakg-graph" }
+osakg-evidence = { path = "../osakg-evidence" }
+osakg-codegraph = { path = "../osakg-codegraph" }
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+thiserror.workspace = true
+walkdir = "2.5"
+

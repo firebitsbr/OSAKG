@@ -1,0 +1,10 @@
+{
+  "name": "repo-ai-agent",
+  "version": "1.0.0",
+  "description": "Synthetic AI Agent & Tool fixture",
+  "main": "src/agent.ts",
+  "dependencies": {
+    "repo-billing": "^1.0.0"
+  }
+}
+

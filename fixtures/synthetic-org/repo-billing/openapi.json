@@ -1,0 +1,16 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Synthetic Billing API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/billing/invoices": {
+      "post": {
+        "summary": "Process and record invoice",
+        "operationId": "processInvoice"
+      }
+    }
+  }
+}
+
